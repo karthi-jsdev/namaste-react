@@ -17,11 +17,12 @@ const Body = () => {
       const json = await data.json();
 
       const restaurants =
-        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
       if (restaurants) {
+        console.log(restaurants);
         setListOfRestaurants(restaurants);
-        setFilteredRestaurant(restaurants); // Save all data for filtering
+        setFilteredRestaurant(restaurants); 
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -40,7 +41,6 @@ const Body = () => {
   const searchFilterText = (() => {
     const filteredList = listOfRestaurant.filter((res) =>{ return res.info.name.toLowerCase().includes(searchText.toLowerCase())});
     setFilteredRestaurant(filteredList);
-
   })
   return filteredRestaurant.length === 0 ? (<Shimmer />) : (
     <div className="body">

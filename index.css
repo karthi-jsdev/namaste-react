@@ -38,3 +38,24 @@
 .res-logo{
     width: 100%;
 }
+.filter-btn{
+    margin-top: 10px;
+}
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.shimmer-card{
+    margin: 5px;
+    padding: 5px;
+    width: 200px;
+    height: 350px;
+    background-color: lightgray;
+}
+.login{
+    padding: 20px;
+    cursor: pointer;
+}
+.search{
+    display: flex;
+}

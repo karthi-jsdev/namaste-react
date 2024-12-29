@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer"
+import useOnlineStatus from "../utils/useOnlineStatus";
+import { Link } from "react-router-dom";
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurants] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const onlineStatus = useOnlineStatus();
   useEffect(() => {
     fetchData();
   }, []);
@@ -17,17 +20,17 @@ const Body = () => {
       const json = await data.json();
 
       const restaurants =
-        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
       if (restaurants) {
-        console.log(restaurants);
         setListOfRestaurants(restaurants);
-        setFilteredRestaurant(restaurants); 
+        setFilteredRestaurant(restaurants); // Save all data for filtering
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+  
 
   const filterTopRated = () => {
     const filteredList = listOfRestaurant.filter(
@@ -41,7 +44,13 @@ const Body = () => {
   const searchFilterText = (() => {
     const filteredList = listOfRestaurant.filter((res) =>{ return res.info.name.toLowerCase().includes(searchText.toLowerCase())});
     setFilteredRestaurant(filteredList);
+
   })
+  if(onlineStatus === false){
+    return (
+      <h1>You are Offline, Please check your internet connection</h1>
+    )
+  }
   return filteredRestaurant.length === 0 ? (<Shimmer />) : (
     <div className="body">
       <div className="filter">
@@ -57,7 +66,7 @@ const Body = () => {
       <div className="res-conatiner">
         {filteredRestaurant.map((restaurant, index) => {
           const { info } = restaurant;
-          return <RestaurantCard key={index} resData={info} />;
+          return <Link key={index} to={"/RestaurantMenu/"+info.id}><RestaurantCard  resData={info} /></Link>;
         })}
       </div>
     </div>

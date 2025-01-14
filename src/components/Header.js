@@ -7,21 +7,21 @@ const Header = () => {
     reactBtn === 'Login' ? setReactBtn('Logout') : setReactBtn('Login')
   })
   return (
-    <div className="header">
+    <div className="flex justify-between bg-pink-100 shadow-lg">
       <div className="logo-container">
         <img
-          className="logo"
+          className="w-40"
           src={LOGO_URL}
         />
       </div>
-      <div className="nav-items">
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About Us</Link></li>
-          <li><Link to="/contact">Contact Us</Link></li>
-          <li><Link to="/grocery">Grocery</Link></li>
-          <li>Cart</li>
-          <button className='login' onClick={togglebtn}>{reactBtn}</button>
+      <div className="flex items-center">
+        <ul className="flex p4 m-4">
+          <li className="px-2"><Link to="/">Home</Link></li>
+          <li className="px-2"><Link to="/about">About Us</Link></li>
+          <li className="px-2"><Link to="/contact">Contact Us</Link></li>
+          <li className="px-2"><Link to="/grocery">Grocery</Link></li>
+          <li className="px-2">Cart</li>
+          <button className='px-2' onClick={togglebtn}>{reactBtn}</button>
         </ul>
       </div>
     </div>

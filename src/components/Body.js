@@ -16,7 +16,7 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.9615398&lng=79.2961468&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.999076&lng=77.5307713&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
       );
       const json = await data.json();
 
@@ -66,11 +66,10 @@ const Body = () => {
       </div>
 
       <div className="res-conatiner flex flex-wrap justify-between">
-        {console.log(filteredRestaurant)}
         {filteredRestaurant.map((restaurant, index) => {
           const { info } = restaurant;
           return <Link key={index} to={"/RestaurantMenu/" + info.id}>
-            {restaurant?.data?.veg ? <RestaurantCardPromoted resData={info} /> : <RestaurantCard resData={info} />}
+            {info?.isOpen ? <RestaurantCardPromoted resData={info} /> : <RestaurantCard resData={info} />}
           </Link>;
         })}
       </div>

@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer"
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { Link } from "react-router-dom";
+import userContext from "../utils/userContext";
+
 const Body = () => {
   const [listOfRestaurant, setListOfRestaurants] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
+  const {loggedInUser,setUserName} = useContext(userContext);
   const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
   useEffect(() => {
     fetchData();
@@ -59,10 +62,17 @@ const Body = () => {
           <input type="text" value={searchText} onChange={setFilterSearchText} className="border border-solid border-black px-4 mx-4" />
           <button className="px-4 py-2 bg-green-100 rounded-lg" onClick={searchFilterText}>Search</button>
         </div>
-        <button className="px-4  bg-gray-100 rounded-lg"
-          onClick={filterTopRated}
-        >Top Rated Restaurant
-        </button>
+        <div className="search px-4  flex items-center">
+          <button className="px-4  bg-gray-100 rounded-lg"
+            onClick={filterTopRated}
+          >Top Rated Restaurant
+          </button>
+        </div>
+        <div className="search px-4  flex items-center">
+          <label>UserName</label>
+          <input className="border border-black" type="text" value={loggedInUser} onChange={(e)=>setUserName(e.target.value)}/>
+        </div>
+        
       </div>
 
       <div className="res-conatiner flex flex-wrap justify-between">

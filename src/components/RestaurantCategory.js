@@ -33,7 +33,7 @@ const RestaurantCategory = ({ data,showItems,setShowIndex }) => {
                     </div>
 
                     <div>
-                      {showItems && <ItemList data={element} key={index} />}
+                      {showItems && <ItemList items={element} key={index} />}
                     </div>
                   </div>
                 ))}

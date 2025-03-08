@@ -24,3 +24,13 @@
     useEffect()
     useState()
 */
+
+# redux toolkit
+
+install redux toolkits
+@reduxjs/toolkit and react-redux
+- Build for store
+- connect store to the app
+- slice(cartslice)
+- dispatch(action)
+- selector

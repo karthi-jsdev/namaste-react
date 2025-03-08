@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import userContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [reactBtn, setReactBtn] = useState("Login");
@@ -10,6 +11,11 @@ const Header = () => {
     reactBtn === "Login" ? setReactBtn("Logout") : setReactBtn("Login");
   };
   const { loggedInUser } = useContext(userContext);
+
+  const cartItems = useSelector((store) => {
+    return store.cart.items;
+  });
+  
   return (
     <div className="flex justify-between bg-pink-100 shadow-lg">
       <div className="logo-container">
@@ -29,7 +35,9 @@ const Header = () => {
           <li className="px-2">
             <Link to="/grocery">Grocery</Link>
           </li>
-          <li className="px-2">Cart</li>
+          <li className="px-2 font-bold">
+            <Link to="/cart">Cart({cartItems.length} items)</Link>
+          </li>
           <button className="px-2" onClick={togglebtn}>
             {reactBtn}
           </button>
